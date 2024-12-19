@@ -23,10 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-frontend/android-chrome-192x192.png
-frontend/android-chrome-512x512.png
-frontend/favicon-16x16.png
-frontend/favicon-32x32.png
-frontend/apple-touch-icon.png
-frontend/favicon.ico
-frontend/about.txt
+favicon_io
