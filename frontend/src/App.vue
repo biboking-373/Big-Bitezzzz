@@ -16,7 +16,8 @@ export default {
         </router-link>
         <div class="navbar-nav">
           <router-link to="/" class="nav-item nav-link">Home</router-link>
-          <router-link to="/tutorials" class="nav-item nav-link">Tutorials</router-link>
+          <router-link to="/tutorials" class="nav-item nav-link">Recipes</router-link>
+          <router-link to="/bookmarks" class="nav-item nav-link">My Bookmarks</router-link>
           <router-link to="/login" class="nav-item nav-link">Login</router-link>
           <router-link to="/register" class="nav-item nav-link">Register</router-link>
         </div>
