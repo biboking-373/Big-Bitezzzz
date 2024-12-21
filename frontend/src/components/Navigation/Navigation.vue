@@ -47,6 +47,12 @@ export default{
 
 <style scoped>
 /*BELOW WILL BE THE COLOR OF text of  THE NAVBAR when hovered */
+
+.navbar-nav .nav-link {
+margin: 0 10px;
+}
+
+
 .navbar-nav .nav-link:hover {
     font-size: 15px;
     color:white;
@@ -60,7 +66,7 @@ img {
     height: 61px;
 }
 
-.navbar-nav .nav-link:hover {
+.navbar-nav .nav-link{
     font-size: 15px;
 }
 }
