@@ -1,5 +1,5 @@
 <script>
-export default {
+export default{
     name: 'Navigation'
 }
 </script>
@@ -34,7 +34,7 @@ export default {
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <div class="navbar-nav">
             <router-link to="/" class="nav-item nav-link fw-bold">Home</router-link>
-            <router-link to="/tutorials" class="nav-item nav-link fw-bold">Recipes</router-link>
+            <router-link to="/recipes" class="nav-item nav-link fw-bold">Recipes</router-link>
             <router-link to="/bookmarks" class="nav-item nav-link fw-bold">My Bookmarks</router-link>
             <router-link to="/login" class="nav-item nav-link fw-bold">Login</router-link>
             <router-link to="/register" class="nav-item nav-link fw-bold">Register</router-link>
@@ -48,28 +48,28 @@ export default {
 <style scoped>
 /*BELOW WILL BE THE COLOR OF text of  THE NAVBAR when hovered */
 .navbar-nav .nav-link:hover {
-    font-size: 14px;
+    font-size: 15px;
     color:white;
 }
 /* Media queries for responsiveness */
 
-/* Smaller screens (max-width: 576px) */
-@media (max-width: 576px) {
+/* Smaller screens (max-width: 577px) */
+@media (max-width: 577px) {
 img {
-    width: 60px;
-    height: 60px;
+    width: 61px;
+    height: 61px;
 }
 
 .navbar-nav .nav-link:hover {
-    font-size: 14px;
+    font-size: 15px;
 }
 }
 
-/* Medium screens (max-width: 768px) */
-@media (max-width: 768px) {
+/* Medium screens (max-width: 769px) */
+@media (max-width: 769px) {
 img {
-    width: 70px;
-    height: 70px;
+    width: 71px;
+    height: 71px;
 }
 
 .navbar-nav {
@@ -77,11 +77,11 @@ img {
 }
 }
 
-/* Large screens (min-width: 992px) */
-@media (min-width: 992px) {
+/* Large screens (min-width: 993px) */
+@media (min-width: 993px) {
 img {
-    width: 90px;
-    height: 90px;
+    width: 91px;
+    height: 91px;
 }
 }
 </style>
