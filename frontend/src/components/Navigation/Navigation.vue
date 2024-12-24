@@ -5,7 +5,7 @@ export default{
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-md navbar-light bg-info fixed-top ">
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color:mediumslateblue">
     <div class="container d-flex justify-content-between align-items-center">
         <!-- Image on the left -->
         <router-link to="/" class="navbar-brand d-flex align-items-center">

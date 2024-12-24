@@ -10,7 +10,7 @@ data() {
 </script>
 
 <template>
-<footer class="footer mt-auto py-3 bg-info-subtle border-top fixed-bottom">
+<footer class="footer py-3 bg-info-subtle border-top mt-auto">
     <div class="container">
     <div class="row text-center">
         <div class="col-12 mb-2">

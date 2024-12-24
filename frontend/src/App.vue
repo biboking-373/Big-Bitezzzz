@@ -10,11 +10,10 @@ export default {
   },
 };
 </script>
-
 <template>
   <div id="app" class="d-flex flex-column min-vh-100">
     <Navigation />
-    <main class="flex-grow-1 mt-5 pt-5">
+    <main class="flex-grow-1 container mt-5 pt-4">
       <router-view></router-view>
     </main>
     <Footer />
@@ -23,6 +22,12 @@ export default {
 
 <style scoped>
 #app {
-  padding-bottom: 60px; /* Ensures content doesn't get hidden behind footer */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
 </style>
