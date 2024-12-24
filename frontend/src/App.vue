@@ -25,6 +25,7 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color:rgb(15, 11, 11);
 }
 
 main {

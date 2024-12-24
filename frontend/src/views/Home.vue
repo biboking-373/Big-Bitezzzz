@@ -1,79 +1,121 @@
 <script>
-import { ref, onMounted } from 'vue'
-
 export default {
-
-    setup() {
-        const featuredTutorials = ref([
-            {
-                id: 1,
-                title: 'Classic Chocolate Cake',
-                description: 'Learn to bake the perfect chocolate cake',
-                image: 'Images/chocolate.png',
-            },
-            {
-                id: 2,
-                title: 'Vanilla Sponge Cake',
-                description: 'A light and fluffy vanilla sponge tutorial',
-                image: 'Images/vanilla.png',
-            },
-        ]);
-
-        onMounted(() => {
-            // Fetch featured tutorials from backend
-        });
-
-        return {
-            featuredTutorials,
-        };
-    },
-};
+    name: 'Home',
+    data() {
+    return {
+    featuredCakes: [
+        {
+        id: 1,
+        title: 'Classic Chocolate Cake',
+        description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about making the perfect chocolate cake.'
+        },
+        {
+        id: 2,
+        title: 'Vanilla Masterpiece',
+        description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about creating a fluffy vanilla cake.'
+        },
+        {
+        id: 3,
+        title: 'Special Occasions',
+        description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about crafting celebration cakes.'
+        }
+    ]
+    }
+}
+}
 </script>
 
 <template>
-    <div class="home container py-4">
-        <h1 class="text-center mb-4">Welcome to Cake Tutorial Hub</h1>
-        <p class="text-center mb-5">Discover amazing cake recipes and tutorials from passionate bakers!</p>
-        
-        <div class="featured-tutorials mb-5">
-            <h2 class="mb-4">Variety of samples from the website</h2>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4" v-for="tutorial in featuredTutorials" :key="tutorial.id">
-                    <div class="card h-100 shadow-sm">
-                        <img :src="tutorial.image" class="card-img-top mx-auto p-3" :alt="tutorial.title" 
-                             style="object-fit: cover; height: 200px; width: auto;">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ tutorial.title }}</h5>
-                            <p class="card-text flex-grow-1">{{ tutorial.description }}</p>
-                            <router-link :to="`/tutorial/${tutorial.id}`" 
-                                       class="btn btn-primary mt-auto">
-                                View Tutorial
-                            </router-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="home">
+    <!-- Welcome Section -->
+    <section class="welcome-section bg-light py-5">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-8">
+            <h1 class="display-4 mb-4">WELCOMING MESSAGE</h1>
+            <p class="lead mb-4">
+            This is prime space! Use it to elaborate on your attention-grabbing section title. 
+            Explain what this section is about, share some details, and give just the right 
+            amount of information to get the audience hooked.
+            </p>
+            <button class="btn btn-dark btn-lg">Get Started</button>
+        </div>
         </div>
     </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="featured-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Examples of what you do and the images that are on display</h2>
+        
+        <div class="row">
+        <div class="col-md-4" v-for="cake in featuredCakes" :key="cake.id">
+            <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center">
+                <h3 class="h4 mb-3">{{ cake.title }}</h3>
+                <p class="card-text">{{ cake.description }}</p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Passion Section -->
+    <section class="passion-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Passion about the thing</h2>
+        <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <p class="mb-4">Your Main Idea Goes Here</p>
+            <p class="mb-4">WHy you have this site</p>
+            <p>There is just enough space here for several lines of text. You can add details, 
+                share a quick story, or elaborate on an idea, as long as you keep the information 
+                engaging and relevant. For maximum impact, make sure you get your message across 
+                clearly yet concisely.</p>
+        </div>
+        </div>
+    </div>
+    </section>
+</div>
 </template>
 
 <style scoped>
-.home {
-    margin-bottom: 6rem; /* Adds significant space before footer */
+.welcome-section {
+background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+min-height: 60vh;
+display: flex;
+align-items: center;
+}
+
+.featured-section {
+background-color: white;
 }
 
 .card {
-    transition: transform 0.2s;
+transition: transform 0.3s ease;
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(10px);
 }
 
 .card:hover {
-    transform: translateY(-5px);
+transform: translateY(-10px);
 }
 
-/* Responsive image sizing */
+.passion-section {
+background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .card-img-top {
-        height: 180px;
-    }
+.welcome-section {
+    min-height: 40vh;
+    text-align: center;
+}
+
+.card {
+    margin-bottom: 2rem;
+}
 }
 </style>
