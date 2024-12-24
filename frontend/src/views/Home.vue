@@ -24,7 +24,7 @@ export default {
 }
 }
 </script>
-
+<!--This is just a skeleton of what the website home page will look like i used canva-->
 <template>
 <div class="home">
     <!-- Welcome Section -->
