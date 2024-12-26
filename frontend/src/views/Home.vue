@@ -3,57 +3,51 @@ export default {
     name: 'Home',
     data() {
     return {
-    featuredCakes: [
+        featuredCakes: [
         {
-        id: 1,
-        title: 'Classic Chocolate Cake',
-        description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about making the perfect chocolate cake.'
+            id: 1,
+            title: 'Classic Chocolate Cake',
+            description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about making the perfect chocolate cake.'
         },
-        {
-        id: 2,
-        title: 'Vanilla Masterpiece',
-        description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about creating a fluffy vanilla cake.'
+        { 
+            id: 2,
+            title: 'Vanilla Masterpiece',
+            description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about creating a fluffy vanilla cake.'
         },
-        {
-        id: 3,
-        title: 'Special Occasions',
-        description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about crafting celebration cakes.'
-        }
+        
     ]
     }
 }
 }
 </script>
-<!--This is just a skeleton of what the website home page will look like i used canva-->
+
 <template>
-<div class="home">
-    <!-- Welcome Section -->
-    <section class="welcome-section bg-light py-5">
-    <div class="container">
-        <div class="row">
-        <div class="col-md-8">
-            <h1 class="display-4 mb-4">WELCOMING MESSAGE</h1>
-            <p class="lead mb-4">
-            This is prime space! Use it to elaborate on your attention-grabbing section title. 
-            Explain what this section is about, share some details, and give just the right 
-            amount of information to get the audience hooked.
-            </p>
-            <button class="btn btn-dark btn-lg">Get Started</button>
-        </div>
-        </div>
+<div class="home-container">
+    <!-- Welcome Section with full width -->
+    <section class="welcome-section">
+    <div class="content-wrapper">
+        <h1 class="display-4 fw-bold">
+            Welcome to the home of the best recipes in town<br>
+            To get started please click the button below
+        </h1>
+        <p class="lead welcome-text">
+        
+        </p>
+        <button class="btn btn-info btn-lg">Get Started</button>
     </div>
     </section>
 
-    <!-- Main Content Section -->
-    <section class="featured-section py-5">
-    <div class="container">
-        <h2 class="text-center mb-5">Examples of what you do and the images that are on display</h2>
-        
-        <div class="row">
-        <div class="col-md-4" v-for="cake in featuredCakes" :key="cake.id">
-            <div class="card h-100 border-0 shadow-sm">
-            <div class="card-body text-center">
-                <h3 class="h4 mb-3">{{ cake.title }}</h3>
+    <!-- Featured Section with cards -->
+    <section class="featured-section">
+    <div class="content-wrapper">
+        <h2 class="text-center section-title">At Big Bitezz we've got a variety of ways you can bake your dream cake
+            leaving you not only knowledgable
+        </h2>
+        <div class="cards-container">
+        <div class="feature-card" v-for="cake in featuredCakes" :key="cake.id">
+            <div class="card h-100">
+            <div class="card-body">
+                <h3 class="card-title">{{ cake.title }}</h3>
                 <p class="card-text">{{ cake.description }}</p>
             </div>
             </div>
@@ -63,18 +57,18 @@ export default {
     </section>
 
     <!-- Passion Section -->
-    <section class="passion-section py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-4">Passion about the thing</h2>
-        <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <p class="mb-4">Your Main Idea Goes Here</p>
-            <p class="mb-4">WHy you have this site</p>
-            <p>There is just enough space here for several lines of text. You can add details, 
-                share a quick story, or elaborate on an idea, as long as you keep the information 
-                engaging and relevant. For maximum impact, make sure you get your message across 
-                clearly yet concisely.</p>
-        </div>
+    <section class="passion-section">
+    <div class="content-wrapper">
+        <h2 class="text-center section-title">Why choose BIG BITEZZ</h2>
+        <div class="passion-content">
+        <p class="main-idea">This is a platform where we share ideas on how to make your ideal
+            sweet cake
+        </p>
+        <p class="sub-idea">Not only will you have fun</p>
+        <p class="description">
+            But also you and your family can create memories saving you a penny and giving
+            you memories to last
+        </p>
         </div>
     </div>
     </section>
@@ -82,40 +76,126 @@ export default {
 </template>
 
 <style scoped>
+.home-container {
+width: 100%;
+}
+
+/* Welcome Section */
 .welcome-section {
-background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
-min-height: 60vh;
+background: linear-gradient(to bottom right, #14151d, #f8f9fa);
+min-height: 100vh;
+padding: 120px 0;
 display: flex;
+margin-bottom:60px;
 align-items: center;
+background-image: url("/Untitled design.png");
+color:rgb(10, 31, 30);
+border-radius:20px;
+border:none;
 }
 
+/* Content Wrapper for all sections */
+.content-wrapper {
+max-width: 1400px;
+margin: 0 auto;
+padding: 0 2rem;
+}
+
+.welcome-text {
+max-width: 800px;
+margin: 2rem 0;
+font-size: 1.25rem;
+line-height: 1.8;
+}
+
+/* Featured Section */
 .featured-section {
-background-color: white;
+background-color: #bdb433;
+color:white;
+margin-bottom:60px;
+padding: 120px 0;
 }
 
-.card {
+.section-title {
+font-size: 2.5rem;
+margin-bottom: 4rem;
+}
+
+.cards-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+padding: 2rem 0;
+}
+
+.feature-card .card {
+border: none;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 transition: transform 0.3s ease;
-background: rgba(255, 255, 255, 0.9);
-backdrop-filter: blur(10px);
+padding: 2rem;
 }
 
-.card:hover {
+.feature-card .card:hover {
 transform: translateY(-10px);
 }
 
-.passion-section {
-background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+.card-title {
+font-size: 1.5rem;
+margin-bottom: 1.5rem;
 }
 
-/* Responsive adjustments */
+/* Passion Section */
+.passion-section {
+background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+padding: 120px 0;
+margin-bottom:60px;
+}
+
+.passion-content {
+max-width: 800px;
+margin: 0 auto;
+text-align: center;
+}
+
+.main-idea {
+font-size: 1.5rem;
+margin-bottom: 1.5rem;
+}
+
+.sub-idea {
+font-size: 1.25rem;
+margin-bottom: 2rem;
+color: #666;
+}
+
+.description {
+font-size: 1.1rem;
+line-height: 1.8;
+color: #444;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+section {
+    padding: 80px 0;
+}
+
 .welcome-section {
-    min-height: 40vh;
+    min-height: auto;
     text-align: center;
 }
 
-.card {
-    margin-bottom: 2rem;
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.cards-container {
+    grid-template-columns: 1fr;
+}
+
+.content-wrapper {
+    padding: 0 1rem;
 }
 }
 </style>
