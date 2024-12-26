@@ -28,7 +28,6 @@ export default {
     <div class="content-wrapper">
         <h1 class="display-4 fw-bold">
             Welcome to the home of the best recipes in town<br>
-            To get started please click the button below
         </h1>
         <p class="lead welcome-text">
         
