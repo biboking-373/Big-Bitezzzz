@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../components/Auth/Login.vue'
+import Register from '../components/Auth/Register.vue'
 
 const routes = [
 { 
@@ -15,7 +16,14 @@ const routes = [
     name: 'Login',
     meta: { requiresGuest: true }
 
-}
+},
+
+{
+    path:'/Register',
+    component: Register,
+    name: 'Register',
+    meta: { requiresGuest:true}
+},
 
 ]
 
