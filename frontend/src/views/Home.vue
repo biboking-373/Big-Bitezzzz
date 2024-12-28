@@ -7,12 +7,10 @@ export default {
         {
             id: 1,
             title: 'Classic Chocolate Cake',
-            description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about making the perfect chocolate cake.'
         },
         { 
             id: 2,
             title: 'Vanilla Masterpiece',
-            description: 'This is prime space! Use it to elaborate on your attention-grabbing section title. Explain what this section is about, share some details about creating a fluffy vanilla cake.'
         },
         
     ]
@@ -47,7 +45,6 @@ export default {
             <div class="card h-100">
             <div class="card-body">
                 <h3 class="card-title">{{ cake.title }}</h3>
-                <p class="card-text">{{ cake.description }}</p>
             </div>
             </div>
         </div>
