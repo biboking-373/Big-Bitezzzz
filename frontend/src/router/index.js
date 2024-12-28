@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../components/Auth/Login.vue'
 import Register from '../components/Auth/Register.vue'
 import Recipes from '../views/Recipes.vue'
-import Tutorialguide from '../components/Tutorial/Tutorialsguide.vue'
+import Tutorialguide from '../components/recipes/Tutorial/Tutorialsguide.vue'
 
 const routes = [
 { 
