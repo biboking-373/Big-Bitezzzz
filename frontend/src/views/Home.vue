@@ -30,7 +30,10 @@ export default {
         <p class="lead welcome-text">
         
         </p>
-        <button class="btn btn-info btn-lg">Get Started</button>
+        <router-link to="/register">
+<button class="btn btn-info btn-lg">Get Started</button>
+        </router-link>
+        
     </div>
     </section>
 
