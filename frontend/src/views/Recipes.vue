@@ -1,4 +1,3 @@
-<!-- file:///home/alice/cake library ex/frontend/src/views/TutorialList.vue -->
 <template>
 <div class="tutorials-container">
     <h2>Cake Tutorials</h2>

@@ -12,11 +12,13 @@
     "@fortawesome/fontawesome-free": "^6.7.2",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "dompurify": "^3.2.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
     "@vitejs/plugin-vue": "^5.2.1",
     "vite": "^6.0.1"
   }
