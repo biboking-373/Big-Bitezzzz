@@ -1,10 +1,10 @@
 import { createStore } from 'vuex'
 import auth from './modules/auth'
-import tutorials from './modules/tutorials'
+import tutorial from './modules/tutorial'
 
 export default createStore({
 modules: {
     auth,
-    tutorials
+    tutorial,
 }
 })

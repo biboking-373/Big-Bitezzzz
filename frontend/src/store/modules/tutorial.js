@@ -1,5 +1,6 @@
 // /home/alice/cake library ex/frontend/src/store/modules/tutorials.js
 export default {
+    namespaced: true,
     state: {
         tutorials: [],
         currentTutorial: null
@@ -35,4 +36,4 @@ export default {
         getAllTutorials: state => state.tutorials,
         getCurrentTutorial: state => state.currentTutorial
     }
-    }
+}

@@ -1,42 +1,38 @@
 export default {
+    namespaced: true,
     state: {
-        user: null,
-        token: localStorage.getItem('token') || null
+        token: localStorage.getItem('token') || null,
+        user: JSON.parse(localStorage.getItem('user')) || null
     },
     mutations: {
-        setUser(state, user) {
-        state.user = user
-        },
         setToken(state, token) {
-        state.token = token
-        localStorage.setItem('token', token)
+            localStorage.setItem('token', token)
+            state.token = token
         },
-        clearAuth(state) {
-        state.user = null
-        state.token = null
-        localStorage.removeItem('token')
+        setUser(state, user) {
+            localStorage.setItem('user', JSON.stringify(user))
+            state.user = user
+        },
+        clearToken(state) {
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            state.token = null
+            state.user = null
         }
     },
     actions: {
-        login({ commit }, credentials) {
-          // Placeholder login action
-        commit('setUser', { username: credentials.email })
-        commit('setToken', 'sample-token')
-        },
-        register({ commit }, userData) {
-          // Placeholder register action
-        commit('setUser', { 
-            username: userData.username, 
-            email: userData.email 
-        })
-        commit('setToken', 'sample-registration-token')
+        login({ commit }, { token, user }) {
+            commit('setToken', token)
+            commit('setUser', user)
         },
         logout({ commit }) {
-        commit('clearAuth')
+            commit('clearToken')
+            window.location.href = '/Login'
         }
     },
     getters: {
         isAuthenticated: state => !!state.token,
-        currentUser: state => state.user
+        getToken: state => state.token,
+        getCurrentUser: state => state.user
     }
-    }
+}
