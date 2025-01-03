@@ -1,3 +1,59 @@
+<script>
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
+export default {
+  name: 'Register',
+  setup() {
+    const store = useStore()
+    const router = useRouter()
+    
+    const username = ref('')
+    const email = ref('')
+    const password = ref('')
+    const confirmPassword = ref('')
+    const error = ref(null)
+
+    const handleRegister = async () => {
+      // Basic validation
+      if (password.value !== confirmPassword.value) {
+        error.value = 'Passwords do not match'
+        return
+      }
+
+      try {
+        // Simulate registration response
+        const response = {
+          token: 'sample-registration-token',
+          user: {
+            username: username.value,
+            email: email.value
+          }
+        }
+
+        // Dispatch login action with registration data
+        await store.dispatch('auth/login', response)
+        
+        // Redirect to account page after successful registration
+        router.push('/account')
+      } catch (err) {
+        error.value = err.response?.data?.message || 'Registration failed'
+      }
+    }
+
+    return {
+      username,
+      email,
+      password,
+      confirmPassword,
+      error,
+      handleRegister
+    }
+  }
+}
+</script>
+
 <template>
 <div class="register-container">
     <h2>Create an Account</h2>
@@ -49,56 +105,6 @@
     </form>
 </div>
 </template>
-
-<script>
-import { ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-
-export default {
-name: 'Register',
-setup() {
-    const store = useStore()
-    const router = useRouter()
-    
-    const username = ref('')
-    const email = ref('')
-    const password = ref('')
-    const confirmPassword = ref('')
-    const error = ref(null)
-
-    const handleRegister = async () => {
-      // Basic validation
-    if (password.value !== confirmPassword.value) {
-        error.value = 'Passwords do not match'
-        return
-    }
-
-    try {
-        await store.dispatch('register', {
-        username: username.value,
-        email: email.value,
-        password: password.value
-        })
-        
-        // Redirect to dashboard or home page after successful registration
-        router.push('/')
-    } catch (err) {
-        error.value = err.response?.data?.message || 'Registration failed'
-    }
-    }
-
-    return {
-    username,
-    email,
-    password,
-    confirmPassword,
-    error,
-    handleRegister
-    }
-}
-}
-</script>
 
 <style scoped>
 .register-container {

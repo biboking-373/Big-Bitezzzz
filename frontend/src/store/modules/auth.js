@@ -1,38 +1,44 @@
 export default {
-    namespaced: true,
-    state: {
-        token: localStorage.getItem('token') || null,
-        user: JSON.parse(localStorage.getItem('user')) || null
+  namespaced: true,
+  state: {
+    user: null,
+    token: localStorage.getItem('token') || null
+  },
+  mutations: {
+    SET_USER(state, user) {
+      state.user = user
     },
-    mutations: {
-        setToken(state, token) {
-            localStorage.setItem('token', token)
-            state.token = token
-        },
-        setUser(state, user) {
-            localStorage.setItem('user', JSON.stringify(user))
-            state.user = user
-        },
-        clearToken(state) {
-            localStorage.removeItem('token')
-            localStorage.removeItem('user')
-            state.token = null
-            state.user = null
-        }
+    SET_TOKEN(state, token) {
+      state.token = token
+      localStorage.setItem('token', token)
     },
-    actions: {
-        login({ commit }, { token, user }) {
-            commit('setToken', token)
-            commit('setUser', user)
-        },
-        logout({ commit }) {
-            commit('clearToken')
-            window.location.href = '/Login'
-        }
-    },
-    getters: {
-        isAuthenticated: state => !!state.token,
-        getToken: state => state.token,
-        getCurrentUser: state => state.user
+    LOGOUT(state) {
+      state.user = null
+      state.token = null
+      localStorage.removeItem('token')
     }
+  },
+  actions: {
+    login({ commit }, { user, token }) {
+      commit('SET_USER', user)
+      commit('SET_TOKEN', token)
+    },
+    logout({ commit }) {
+      commit('LOGOUT')
+    },
+    // Add a register action that calls login
+    register({ dispatch }, userData) {
+      // In a real app, this would call an API to register the user
+      // For now, we'll simulate a successful registration
+      const response = {
+        token: 'sample-token',
+        user: userData
+      }
+      return dispatch('login', response)
+    }
+  },
+  getters: {
+    isAuthenticated: state => !!state.token,
+    currentUser: state => state.user
+  }
 }
