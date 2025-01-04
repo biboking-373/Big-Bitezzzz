@@ -8,12 +8,6 @@
             <p class="lead mb-4">
                 Explore delicious cake recipes, learn professional techniques, and unleash your inner pastry chef.
             </p>
-            <button 
-                class="btn btn-primary btn-lg" 
-                @click="navigateOrRedirect('/register')"
-            >
-                Start Baking Now
-            </button>
         </div>
     </section>
 

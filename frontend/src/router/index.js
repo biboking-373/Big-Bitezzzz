@@ -37,6 +37,13 @@ const routes = [
     component: () => import('../components/ADD RECIPE/addrecipe.vue'),
     meta: { requiresAuth: true }
   },
+
+  {
+    path: '/recipe/:recipeId',
+    name: 'RecipeDetails',
+    component: () => import('../views/RecipeDetails.vue')
+  },
+
   {
     path: '/edit-recipe/:id',
     name: 'EditRecipe',
