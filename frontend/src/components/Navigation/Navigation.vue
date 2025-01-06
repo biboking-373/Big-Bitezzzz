@@ -24,7 +24,6 @@
         <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Wording (links) on the right -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <div class="navbar-nav">
             <router-link to="/" class="nav-item nav-link fw-bold">Home</router-link>

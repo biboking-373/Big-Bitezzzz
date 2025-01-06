@@ -121,7 +121,6 @@ export default {
 
       if (!isAlreadyBookmarked) {
         bookmarkedRecipes.value.push(recipe)
-        // In a real app, you'd also save this to backend/localStorage
         localStorage.setItem('bookmarkedRecipes', JSON.stringify(bookmarkedRecipes.value))
       }
     }
@@ -139,11 +138,9 @@ export default {
       bookmarkedRecipes.value = bookmarkedRecipes.value.filter(
         recipe => recipe.id !== recipeId
       )
-      // Update localStorage
       localStorage.setItem('bookmarkedRecipes', JSON.stringify(bookmarkedRecipes.value))
     }
 
-    // Optional: Load bookmarks from localStorage or backend on component mount
     onMounted(() => {
       const savedBookmarks = localStorage.getItem('bookmarkedRecipes')
       if (savedBookmarks) {
