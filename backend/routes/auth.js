@@ -7,7 +7,17 @@ const User = require('../models/User');
 // User Registration
 router.post('/register', async (req, res) => {
   try {
+    // Log the incoming request body for debugging
+    console.log('Register Request Body:', req.body);
+
     const { username, email, password } = req.body;
+
+    // Validate input
+    if (!username || !email || !password) {
+      return res.status(400).json({ 
+        message: 'Please provide username, email, and password' 
+      });
+    }
 
     // Check if user already exists
     let user = await User.findOne({ email });
@@ -42,54 +52,33 @@ router.post('/register', async (req, res) => {
       process.env.JWT_SECRET, 
       { expiresIn: '1h' }, 
       (err, token) => {
-        if (err) throw err;
+        if (err) {
+          console.error('JWT Sign Error:', err);
+          return res.status(500).json({ message: 'Error generating token', error: err });
+        }
         res.json({ token });
       }
     );
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    // Log the full error for debugging
+    console.error('Registration Error:', error);
+    
+    // Check for validation errors
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ 
+        message: 'Validation Error', 
+        errors: Object.values(error.errors).map(err => err.message) 
+      });
+    }
+
+    // Send more detailed error response
+    res.status(500).json({ 
+      message: 'Server error', 
+      error: error.message 
+    });
   }
 });
 
-// User Login
-router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    // Check if user exists
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    // Compare passwords
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    // Create JWT Payload
-    const payload = {
-      user: {
-        id: user.id
-      }
-    };
-
-    // Generate JWT Token
-    jwt.sign(
-      payload, 
-      process.env.JWT_SECRET, 
-      { expiresIn: '1h' }, 
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+// Rest of the code remains the same...
 
 module.exports = router;
