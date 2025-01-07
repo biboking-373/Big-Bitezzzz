@@ -55,8 +55,19 @@
             class="ingredient-input"
           >
             <input 
-              v-model="recipe.ingredients[index]" 
-              placeholder="Ingredient"
+              v-model="ingredient.amount" 
+              placeholder="Amount"
+              class="ingredient-amount"
+            >
+            <input 
+              v-model="ingredient.unit" 
+              placeholder="Unit (cups, grams)"
+              class="ingredient-unit"
+            >
+            <input 
+              v-model="ingredient.name" 
+              placeholder="Ingredient Name"
+              class="ingredient-name"
             >
             <button 
               type="button" 
@@ -72,6 +83,35 @@
             class="add-ingredient-btn"
           >
             Add Ingredient
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label>Instructions</label>
+          <div 
+            v-for="(instruction, index) in recipe.instructions" 
+            :key="index" 
+            class="instruction-input"
+          >
+            <textarea 
+              v-model="recipe.instructions[index]" 
+              placeholder="Step description"
+              rows="2"
+            ></textarea>
+            <button 
+              type="button" 
+              @click="removeInstruction(index)"
+              class="remove-instruction-btn"
+            >
+              Remove
+            </button>
+          </div>
+          <button 
+            type="button" 
+            @click="addInstruction"
+            class="add-instruction-btn"
+          >
+            Add Step
           </button>
         </div>
 
@@ -129,7 +169,8 @@ export default {
         name: '',
         category: '',
         description: '',
-        ingredients: [''],
+        ingredients: [{ amount: '', unit: '', name: '' }],
+        instructions: [''],
         image: null,
         userId: null
       },
@@ -170,10 +211,16 @@ export default {
   },
   methods: {
     addIngredient() {
-      this.recipe.ingredients.push('')
+      this.recipe.ingredients.push({ amount: '', unit: '', name: '' })
     },
     removeIngredient(index) {
       this.recipe.ingredients.splice(index, 1)
+    },
+    addInstruction() {
+      this.recipe.instructions.push('')
+    },
+    removeInstruction(index) {
+      this.recipe.instructions.splice(index, 1)
     },
     handleImageUpload(event) {
       const file = event.target.files[0]
@@ -185,7 +232,7 @@ export default {
       // Load recipe from local storage
       const recipes = JSON.parse(localStorage.getItem('recipes') || '[]')
       const foundRecipe = recipes.find(r => 
-        r.id === parseInt(id) && r.userId === this.currentUserId
+        String(r.id) === String(id) && r.userId === this.currentUserId
       )
       
       if (foundRecipe) {
@@ -197,44 +244,44 @@ export default {
       }
     },
     saveRecipe() {
-      // Validate form
-      if (!this.recipe.name || !this.recipe.category) {
-        alert('Please fill in all required fields')
-        return
+      // Filter out empty ingredients and instructions
+      this.recipe.ingredients = this.recipe.ingredients.filter(ing => ing.name.trim())
+      this.recipe.instructions = this.recipe.instructions.filter(inst => inst.trim())
+
+      // Generate unique ID if not editing
+      if (!this.recipe.id) {
+        this.recipe.id = `recipe_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
       }
 
-      // Get existing recipes
+      // Retrieve existing recipes
       const recipes = JSON.parse(localStorage.getItem('recipes') || '[]')
-      
+
       if (this.isEditing) {
         // Update existing recipe
         const index = recipes.findIndex(r => 
-          r.id === this.recipe.id && r.userId === this.currentUserId
+          String(r.id) === String(this.recipe.id) && r.userId === this.currentUserId
         )
         if (index !== -1) {
           recipes[index] = { ...this.recipe }
         }
       } else {
         // Add new recipe
-        this.recipe.id = recipes.length > 0 
-          ? Math.max(...recipes.map(r => r.id)) + 1 
-          : 1
-        recipes.push({ ...this.recipe })
+        recipes.push(this.recipe)
       }
 
       // Save to local storage
       localStorage.setItem('recipes', JSON.stringify(recipes))
-      
-      // Navigate back to ingredients page
+
+      // Redirect to ingredients page
       this.$router.push('/ingredients')
     },
     deleteRecipe() {
       if (confirm('Are you sure you want to delete this recipe?')) {
         const recipes = JSON.parse(localStorage.getItem('recipes') || '[]')
         const filteredRecipes = recipes.filter(r => 
-          r.id !== this.recipe.id || r.userId !== this.currentUserId
+          String(r.id) !== String(this.recipe.id) || r.userId !== this.currentUserId
         )
-        
+
         localStorage.setItem('recipes', JSON.stringify(filteredRecipes))
         this.$router.push('/ingredients')
       }
@@ -250,11 +297,97 @@ export default {
   padding: 20px;
 }
 
+.recipe-form-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.ingredient-input, .instruction-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.ingredient-input input, .instruction-input textarea {
+  flex-grow: 1;
+}
+
+.add-ingredient-btn, 
+.add-instruction-btn, 
+.remove-ingredient-btn,
+.remove-instruction-btn {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-ingredient-btn,
+.remove-instruction-btn {
+  background-color: #f44336;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.save-btn, .delete-btn, .cancel-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+.cancel-btn {
+  background-color: #ddd;
+  color: black;
+}
+
+.image-preview img {
+  max-width: 300px;
+  max-height: 300px;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
 .login-required {
   text-align: center;
   padding: 50px;
-  background-color: #f4f4f4;
-  border-radius: 10px;
 }
 
 .login-btn {
@@ -265,95 +398,5 @@ export default {
   text-decoration: none;
   border-radius: 5px;
   margin-top: 20px;
-}
-
-.recipe-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.form-group input, 
-.form-group select, 
-.form-group textarea {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.ingredients-section {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-.ingredient-input {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.ingredient-input input {
-  flex-grow: 1;
-}
-
-.remove-ingredient-btn {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 3px;
-}
-
-.add-ingredient-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.image-preview img {
-  max-width: 300px;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-.form-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.save-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-
-.delete-btn {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-
-.cancel-btn {
-  background-color: #ddd;
-  color: black;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 5px;
 }
 </style>

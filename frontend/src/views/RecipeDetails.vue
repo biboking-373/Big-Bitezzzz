@@ -107,7 +107,18 @@ export default {
       const savedRecipes = localStorage.getItem('recipes')
       if (savedRecipes) {
         const recipes = JSON.parse(savedRecipes)
-        this.recipe = recipes.find(r => r.id === this.$route.params.recipeId)
+        // Convert both IDs to strings for consistent comparison
+        this.recipe = recipes.find(r => String(r.id) === String(this.$route.params.recipeId))
+      }
+
+      // If recipe is not found, log for debugging
+      if (!this.recipe) {
+        console.error('Recipe not found:', this.$route.params.recipeId)
+        console.error('Available recipes:', JSON.parse(localStorage.getItem('recipes')))
+      } else {
+        // Additional logging for ingredients
+        console.log('Recipe found:', this.recipe)
+        console.log('Ingredients:', this.recipe.ingredients)
       }
     },
     deleteRecipe() {

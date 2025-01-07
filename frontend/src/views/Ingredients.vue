@@ -128,12 +128,20 @@
     },
     created() {
       // Load recipes from local storage
-      const savedRecipes = localStorage.getItem('recipes')
-      if (savedRecipes) {
-        this.recipes = JSON.parse(savedRecipes)
-      }
+      this.loadRecipes()
     },
     methods: {
+      loadRecipes() {
+        const savedRecipes = localStorage.getItem('recipes')
+        if (savedRecipes) {
+          try {
+            this.recipes = JSON.parse(savedRecipes)
+          } catch (error) {
+            console.error('Error parsing recipes:', error)
+            this.recipes = []
+          }
+        }
+      },
       addRecipe(recipe) {
         // Ensure user is logged in
         if (!this.isLoggedIn) {
@@ -141,12 +149,16 @@
           return
         }
   
+        // Generate a unique ID using timestamp and random number
+        recipe.id = `recipe_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+  
         // Add recipe with user ID
         recipe.userId = this.currentUserId
         this.recipes.push(recipe)
         localStorage.setItem('recipes', JSON.stringify(this.recipes))
       },
       viewRecipeDetails(recipe) {
+        console.log('Navigating to recipe:', recipe)
         // Navigate to recipe details page or open a modal
         this.$router.push({ 
           name: 'RecipeDetails', 
@@ -205,18 +217,12 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    transition: transform 0.3s ease;
   }
   
   .recipe-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  }
-  
-  .recipe-card:focus {
-    outline: 2px solid #4CAF50;
-    outline-offset: 4px;
   }
   
   .recipe-image {
@@ -229,45 +235,10 @@
     padding: 15px;
   }
   
-  .recipe-category {
-    color: #666;
-    font-style: italic;
-  }
-  
-  .recipe-description {
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
   .recipe-additional-info {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
     color: #666;
-  }
-  
-  .recipe-additional-info i {
-    margin-right: 5px;
-  }
-  
-  .recipe-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .edit-btn {
-    background-color: #2196F3;
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-  }
-  
-  .no-recipes {
-    text-align: center;
-    color: #666;
-    margin-top: 50px;
-    font-size: 1.2em;
   }
   </style>
