@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:5001/api';  // Updated port to match backend server
 
-// Create a custom error class for API errors
+// Created a custom error class for API errors
 class ApiError extends Error {
     constructor(message, status, data) {
         super(message);

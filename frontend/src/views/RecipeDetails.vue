@@ -94,8 +94,8 @@ export default {
   computed: {
     isOwner() {
       return this.recipe && 
-             localStorage.getItem('token') && 
-             this.recipe.userId === localStorage.getItem('userId')
+            localStorage.getItem('token') && 
+            this.recipe.userId === localStorage.getItem('userId')
     }
   },
   created() {
