@@ -7,10 +7,25 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+.pnp
+.pnp.js
+
+# Production
 dist
 dist-ssr
 *.local
+
+# Testing
+/coverage
+/cypress/videos/
+/cypress/screenshots/
+
+# Environment Variables
+.env
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
@@ -23,4 +38,40 @@ dist-ssr
 *.sln
 *.sw?
 
-favicon_io
+# Vite
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Cache
+.cache/
+.temp/
+
+# Build output
+/build
+
+# Temporary files
+.DS_Store
+Thumbs.db
+*.pem
+
+# Debug
+.debug/
+
+# Local Netlify folder
+.netlify
+
+# Optional
+*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+site.webmanifest
+
+
+/package-lock.json
+
+/public

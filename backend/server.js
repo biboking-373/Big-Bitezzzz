@@ -1,27 +1,31 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
-const dotenv = require('dotenv');
-const connectDB = require('./config/database');
+require('dotenv').config();
 
-// Load environment variables
-dotenv.config();
+const { requestLogger, errorLogger } = require('./middleware/logger');
 
-// Initialize Express
 const app = express();
-
-// Connect to Database
-connectDB();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(requestLogger);  // Add request logging
 
-// Define Routes
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB Connected'))
+.catch(err => console.log(err));
+
+// Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/recipes', require('./routes/recipes'));
 
-// Start Server
+// Error handling middleware
+app.use(errorLogger);
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

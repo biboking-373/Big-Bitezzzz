@@ -16,7 +16,6 @@ export default {
             this.error = null
 
             try {
-                // Simulate login - replace with actual API call
                 const response = {
                     token: 'sample-token',
                     user: {
