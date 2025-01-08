@@ -68,10 +68,3 @@ Thumbs.db
 .env.development.local
 .env.test.local
 .env.production.local
-
-site.webmanifest
-
-
-/package-lock.json
-
-/public

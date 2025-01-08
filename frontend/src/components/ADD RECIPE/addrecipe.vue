@@ -121,11 +121,13 @@
             type="file" 
             @change="handleImageUpload"
             accept="image/*"
+            :disabled="isLoading"
           >
-          <div v-if="recipe.image" class="image-preview">
+          <div v-if="imagePreview" class="image-preview">
             <img 
-              :src="recipe.image" 
+              :src="imagePreview" 
               alt="Recipe Preview"
+              @error="handleImageError"
             >
           </div>
         </div>
@@ -182,7 +184,9 @@ export default {
         'Chocolate Cake',
         'Carrot Cake'
       ],
-      isEditing: false
+      isEditing: false,
+      isLoading: false,
+      imagePreview: null
     }
   },
   computed: {
@@ -209,6 +213,12 @@ export default {
       this.loadRecipe(recipeId)
     }
   },
+  beforeUnmount() {
+    // Clean up any object URLs to prevent memory leaks
+    if (this.imagePreview) {
+      URL.revokeObjectURL(this.imagePreview)
+    }
+  },
   methods: {
     addIngredient() {
       this.recipe.ingredients.push({ amount: '', unit: '', name: '' })
@@ -225,8 +235,11 @@ export default {
     handleImageUpload(event) {
       const file = event.target.files[0]
       if (file) {
-        this.recipe.image = URL.createObjectURL(file)
+        this.imagePreview = URL.createObjectURL(file)
       }
+    },
+    handleImageError() {
+      this.imagePreview = null
     },
     loadRecipe(id) {
       // Load recipe from local storage

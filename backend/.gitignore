@@ -6,7 +6,6 @@
 # Dependencies
 /node_modules
 /package-lock.json
-/package.json
 
 # Logs
 /logs
@@ -42,8 +41,14 @@ coverage
 .env.test.local
 .env.production.local
 
+# IDE specific files
+.idea
 .vscode
-
+*.swp
+*.swo
+.DS_Store
+*.sublime-workspace
+*.sublime-project
 
 # Optional npm cache directory
 .npm
@@ -60,3 +65,7 @@ coverage
 # Uploads directory (if you store uploads locally)
 /uploads
 /public/uploads
+
+# Database
+*.sqlite
+*.sqlite3

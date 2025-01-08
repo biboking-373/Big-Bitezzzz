@@ -1,0 +1,8 @@
+{"body":{},"ip":"::1","level":"info","message":"POST /api/auth/login","params":{},"query":{},"timestamp":"2025-01-08 10:56:49"}
+{"body":{},"ip":"::1","level":"info","message":"POST /api/auth/login","params":{},"query":{},"timestamp":"2025-01-08 10:59:04"}
+{"body":{},"ip":"::1","level":"info","message":"GET /api/health","params":{},"query":{},"timestamp":"2025-01-08 11:00:12"}
+{"body":{},"ip":"::1","level":"info","message":"GET /favicon.ico","params":{},"query":{},"timestamp":"2025-01-08 11:00:13"}
+{"body":{"email":"vinnikinyua7@gmail.com","password":"123","username":"bobi"},"ip":"::1","level":"info","message":"POST /api/auth/register","params":{},"query":{},"timestamp":"2025-01-08 11:01:57"}
+{"body":{"email":"vinnikinyua7@gmail.com","password":"Bobi1@","username":"bobi"},"ip":"::1","level":"info","message":"POST /api/auth/register","params":{},"query":{},"timestamp":"2025-01-08 11:04:38"}
+{"body":{"password":"Bobi1@","username":"bobi"},"ip":"::1","level":"info","message":"POST /api/auth/login","params":{},"query":{},"timestamp":"2025-01-08 11:04:54"}
+{"body":{"password":"Bobi1@","username":"bobi"},"ip":"::1","level":"info","message":"POST /api/auth/login","params":{},"query":{},"timestamp":"2025-01-08 11:14:50"}
